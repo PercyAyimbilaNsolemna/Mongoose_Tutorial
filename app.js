@@ -23,8 +23,13 @@ async function main() {
     await addPerson();
     */
 
+    /*
     //Calls the insertManyDocuments function
     await insertManyFruits();
+    */
+
+    //Calls the readAllDEocuments function 
+    await readAllDocuments();
 }
 
 //Creates a function that adds a collection and document(s) to the fruitsDB database
@@ -120,6 +125,27 @@ async function insertManyFruits() {
     );
 
     Fruit.insertMany([kiwi, orange, pawpaw])
+}
+
+//Creates a function that reads all the documents in the Fruit collection or model
+async function readAllDocuments(){
+    //Defines a schema or structure for the documents in the fruits collection or model
+    const fruitSchema = new mongoose.Schema(
+        {
+        name: String, 
+        score: Number,
+        review: String
+    }
+    );
+
+    //Creates a Fruits collection or model in the fruitsDB database
+    const Fruit = mongoose.model('Fruit', fruitSchema);
+
+    //Reads all the documents in the Fruit collection or model in the fruitsDB database
+    const cursors = await Fruit.find({});
+
+    //Outputs all the documents in the Fruit collection or model in the fruitsDB database
+    console.log(cursors);
 }
 
 //Calls the main function and catches any error and logs it to the console
